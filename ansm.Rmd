@@ -2,8 +2,10 @@
 refine and convert it in a useable format.
 
 `First we load the required libraries`
+
 library(rvest)
 library(stringr)
+
 
 `We move ahead with grabbing the url and extracting the links, which contains the data that concerns us`
 
@@ -27,6 +29,8 @@ an_main <-as.data.frame(t(an_m),header=FALSE)
 ####now we move ahead with sub parts, one by one.
 
 `Indications`
+
+
 Indications <- vector("list", length = (length(an_sm)))
 for(i in 1:length(an_sm)){
   print(i)
@@ -38,7 +42,10 @@ for(i in 1:length(an_sm)){
 Indications = do.call("rbind", lapply(Indications, "[[", 1))
 Indications
 
+
 `Lab operator `
+
+
 Lab_operator <- vector("list", length = (length(an_sm)))
 for(i in 1:length(an_sm)){
   print(i)
@@ -50,7 +57,10 @@ for(i in 1:length(an_sm)){
 Lab_operator = do.call("rbind", lapply(Lab_operator, "[[", 1))
 Lab_operator <- gsub("\n","",Lab_operator)
 
+
 `Reporting origin`
+
+
 Reporting_origin <- vector("list", length = (length(an_sm)))
 for(i in 1:length(an_sm)){
   print(i)
@@ -63,7 +73,10 @@ Reporting_origin = do.call("rbind", lapply(Reporting_origin, "[[", 1))
 Reporting_origin <- gsub("\n","",Reporting_origin)
 
 
+
 `Date`
+
+
 Date <- vector("list", length = (length(an_sm)))
 for(i in 1:length(an_sm)){
   print(i)
@@ -78,6 +91,8 @@ Date
 
 
 `Specific comments`
+
+
 Specific_comments <- vector("list", length = (length(an_sm)))
 for(i in 1:length(an_sm)){
   print(i)
@@ -90,15 +105,18 @@ Specific_comments = do.call("rbind", lapply(Specific_comments, "[[", 1))
 Specific_comments <- gsub("\n","",Specific_comments)
 
 #Now combining all the parts together and structuring them in tabular form
+
 ansm_full <- cbind(Indications,Lab_operator,Reporting_origin,Date,Specific_comments)
 ansm_view <- rbind(an_main,ansm_full)
 colnames(ansm_view) <- c("Indication","Lab operator", "Reporting Origin",
                          "Date","Specific Comments")
 ansm_view <- ansm_view[-1,]
 
-`Attach links for the references
+
+`Attach links for the references`
 
 ansm_view$links <- an_sm
 
 #To view the data
+
 View(ansm_view)
