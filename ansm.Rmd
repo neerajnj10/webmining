@@ -8,9 +8,10 @@ refine and convert it in a useable format.
 #### ```{r} 
 #### 
 ####```
+
+```{r}
 knitr::opts_chunk$set(message = FALSE, ## supress general messages
                       warning = FALSE, ## supress warnings
-                      fig.height = 4, fig.width = 4, ## set figure size (inches)
                       cache = TRUE ## cache code so compilation is faster
                                    ## only runs if chunk is modified
                       )
