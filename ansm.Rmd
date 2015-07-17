@@ -5,16 +5,16 @@ refine and convert it in a useable format.
 #### They are still visible in the compilation log in R.
 
 #### Each of these options can also be set per-chunk, i.e.,
-#### ```{r} 
 #### 
-####```
+#### 
+####
 
 ```{r}
-knitr::opts_chunk$set(message = FALSE, ## supress general messages
-                      warning = FALSE, ## supress warnings
-                      cache = TRUE ## cache code so compilation is faster
-                                   ## only runs if chunk is modified
-                      )
+#### knitr::opts_chunk$set(message = FALSE, ## supress general messages
+####                      warning = FALSE, ## supress warnings
+####                      cache = TRUE ## cache code so compilation is faster
+####                                   ## only runs if chunk is modified
+####                      )
 
 ```
 
