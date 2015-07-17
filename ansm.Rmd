@@ -1,15 +1,13 @@
-#Ansm website contains data on FDA Drug shortage. It is an unstructured data, unlike HTML tables, so our task woudl be to scrape 
-refine and convert it in a useable format.
+##Ansm website contains data on FDA Drug shortage. It is an unstructured data, unlike HTML tables, so our task would be to scrape , refine and convert it in a useable format.
 
+
+```{r}
 #### global options to suppress warnings and messages in final document.
 #### They are still visible in the compilation log in R.
 
 #### Each of these options can also be set per-chunk, i.e.,
-#### 
-#### 
-####
 
-```{r}
+
 #### knitr::opts_chunk$set(message = FALSE, ## supress general messages
 ####                      warning = FALSE, ## supress warnings
 ####                      cache = TRUE ## cache code so compilation is faster
