@@ -1,6 +1,21 @@
 #Ansm website contains data on FDA Drug shortage. It is an unstructured data, unlike HTML tables, so our task woudl be to scrape 
 refine and convert it in a useable format.
 
+#### global options to suppress warnings and messages in final document.
+#### They are still visible in the compilation log in R.
+
+#### Each of these options can also be set per-chunk, i.e.,
+#### ```{r, fig.width = 5} 
+#### ... 
+####```
+knitr::opts_chunk$set(message = FALSE, ## supress general messages
+                      warning = FALSE, ## supress warnings
+                      fig.height = 4, fig.width = 4, ## set figure size (inches)
+                      cache = TRUE ## cache code so compilation is faster
+                                   ## only runs if chunk is modified
+                      )
+
+
 `First we load the required libraries`
 
 ```{r}
