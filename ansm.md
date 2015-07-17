@@ -1,0 +1,104 @@
+#Ansm website contains data on FDA Drug shortage. It is an unstructured data, unlike HTML tables, so our task woudl be to scrape 
+refine and convert it in a useable format.
+
+`First we load the required libraries`
+library(rvest)
+library(stringr)
+
+`We move ahead with grabbing the url and extracting the links, which contains the data that concerns us`
+
+
+an_main <- html("http://www.ansm.sante.fr/S-informer/Informations-de-securite-Ruptures-de-stock-des-medicaments")
+an <- an_main%>% html_nodes("div a")%>%html_attr(name="href")
+
+##regular expression to improve the links
+
+ang <- grep("^/S-informer/Informations-de-securite-Ruptures-de-stock-des-medicaments.*$", an)
+anm <- an[ang]
+anm <- str_c("http://www.ansm.sante.fr",anm)
+an_sm <- anm[-c(1,2)]
+
+###get the main link and with which remaining parts will collaborate.
+
+an_m <- html("http://www.ansm.sante.fr/S-informer/Informations-de-securite-Ruptures-de-stock-des-medicaments/ALKONATREM-150-mg-gelule-Chlorhydrate-de-demeclocycline-Rupture-de-stock")%>%
+  html_nodes("tr th")%>% html_text()
+an_main <-as.data.frame(t(an_m),header=FALSE)
+
+####now we move ahead with sub parts, one by one.
+
+`Indications`
+Indications <- vector("list", length = (length(an_sm)))
+for(i in 1:length(an_sm)){
+  print(i)
+  # error handling - skips to next URL if it gets an error
+  result <- try(
+    Indications[i] <- html(an_sm[[i]])%>% html_nodes(".online_editor th+td")%>% html_text()
+  ); if(class(result) == "try-error") next;
+}
+Indications = do.call("rbind", lapply(Indications, "[[", 1))
+Indications
+
+`Lab operator `
+Lab_operator <- vector("list", length = (length(an_sm)))
+for(i in 1:length(an_sm)){
+  print(i)
+  # error handling - skips to next URL if it gets an error
+  result <- try(
+    Lab_operator[i] <- html(an_sm[[i]])%>% html_nodes("tr~ tr+ tr td") %>% html_text()
+  ); if(class(result) == "try-error") next;
+}
+Lab_operator = do.call("rbind", lapply(Lab_operator, "[[", 1))
+Lab_operator <- gsub("\n","",Lab_operator)
+
+`Reporting origin`
+Reporting_origin <- vector("list", length = (length(an_sm)))
+for(i in 1:length(an_sm)){
+  print(i)
+  # error handling - skips to next URL if it gets an error
+  result <- try(
+    Reporting_origin[i] <- html(an_sm[[i]])%>% html_nodes("tr:nth-child(3) td") %>% html_text()
+  ); if(class(result) == "try-error") next;
+}
+Reporting_origin = do.call("rbind", lapply(Reporting_origin, "[[", 1))
+Reporting_origin <- gsub("\n","",Reporting_origin)
+
+
+`Date`
+Date <- vector("list", length = (length(an_sm)))
+for(i in 1:length(an_sm)){
+  print(i)
+  # error handling - skips to next URL if it gets an error
+  result <- try(
+    Date[i] <- html(an_sm[[i]])%>% html_nodes("tr:nth-child(4) td") %>% html_text()
+  ); if(class(result) == "try-error") next;
+}
+Date = do.call("rbind", lapply(Date, "[[", 1))
+Date <- sub("^.+([0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]).+$","\\1",Date)
+Date
+
+
+`Specific comments`
+Specific_comments <- vector("list", length = (length(an_sm)))
+for(i in 1:length(an_sm)){
+  print(i)
+  # error handling - skips to next URL if it gets an error
+  result <- try(
+    Specific_comments[i] <- html(an_sm[[i]])%>% html_nodes("td div") %>% html_text()
+  ); if(class(result) == "try-error") next;
+}
+Specific_comments = do.call("rbind", lapply(Specific_comments, "[[", 1))
+Specific_comments <- gsub("\n","",Specific_comments)
+
+#Now combining all the parts together and structuring them in tabular form
+ansm_full <- cbind(Indications,Lab_operator,Reporting_origin,Date,Specific_comments)
+ansm_view <- rbind(an_main,ansm_full)
+colnames(ansm_view) <- c("Indication","Lab operator", "Reporting Origin",
+                         "Date","Specific Comments")
+ansm_view <- ansm_view[-1,]
+
+`Attach links for the references
+
+ansm_view$links <- an_sm
+
+#To view the data
+View(ansm_view)
