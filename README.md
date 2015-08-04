@@ -6,4 +6,7 @@ This also includes demo of web data collection in an interactive dashboard/appli
 
 > downloading and uploading features adn interactive plotting
 
+
+**Please wait 10-15 minutes isnce data is coming directly from webpages and volume is considerably big, it will take time to upload all at once**
+
 check the demo here: [Interactive reporting with shiny](https://neeraj.shinyapps.io/qoolityapp)
