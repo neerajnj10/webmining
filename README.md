@@ -3,6 +3,7 @@ Complete list of several different procedures that can be used to web scraping, 
 
 This also includes demo of web data collection in an interactive dashboard/application. 
 > Automatic updating of data when web updates
+
 > downloading and uploading features adn interactive plotting
 
 check the demo here: [Interactive reporting with shiny]("https://neeraj.shinyapps.io/qoolityapp)
