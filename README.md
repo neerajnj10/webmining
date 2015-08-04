@@ -6,4 +6,4 @@ This also includes demo of web data collection in an interactive dashboard/appli
 
 > downloading and uploading features adn interactive plotting
 
-check the demo here: [Interactive reporting with shiny]("https://neeraj.shinyapps.io/qoolityapp")
+check the demo here: [Interactive reporting with shiny](https://neeraj.shinyapps.io/qoolityapp)
