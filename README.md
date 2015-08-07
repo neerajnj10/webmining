@@ -9,4 +9,6 @@ This also includes demo of web data collection in an interactive dashboard/appli
 
 **Please wait 5-10 minutes since data is coming directly from webpages and volume is considerably big, it will take time to upload all at once**
 
+**spurce code would be updated soon** $ThankYou$
+
 check the demo here: [Interactive reporting with shiny](https://neeraj.shinyapps.io/qoolityapp)
