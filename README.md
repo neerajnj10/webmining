@@ -13,4 +13,5 @@ This also includes demo of web data collection in an interactive dashboard/appli
 
 *Thank you*
 
-check the demo here: [Interactive reporting with shiny](https://neeraj.shinyapps.io/qoolityapp)
+check the demo here: [Interactive reporting with shiny](https://neeraj.shinyapps.io/qoolityapp) 
+- I would recommend Google chrome to open and run this up..
