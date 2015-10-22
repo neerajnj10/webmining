@@ -1,3 +1,4 @@
+```
 library(shinyapps)
 library(rvest)
 library(RCurl)
@@ -596,3 +597,4 @@ q <- rbind(q1, q2)
 healthcanadamain <- q
 
 sfStop()
+```
